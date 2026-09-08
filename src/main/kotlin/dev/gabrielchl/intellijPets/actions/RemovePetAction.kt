@@ -12,6 +12,7 @@ import javax.swing.JPanel
 
 class RemovePetAction: AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
+        if (PetsSettings.instance.state.petList.isEmpty()) return
         val wrapper = RemovePetDialogWrapper()
         if (wrapper.showAndGet()) {
             PetsSettings.instance.state.petList.remove(wrapper.comboBox.item)
