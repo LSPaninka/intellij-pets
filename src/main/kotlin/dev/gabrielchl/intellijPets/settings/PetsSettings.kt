@@ -2,6 +2,7 @@ package dev.gabrielchl.intellijPets.settings
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.*
+import dev.gabrielchl.intellijPets.utils.Constants
 
 @Service
 @State(
@@ -10,8 +11,8 @@ import com.intellij.openapi.components.*
 )
 class PetsSettings: PersistentStateComponent<PetsSettings.State> {
     class State {
-        var petList = arrayListOf("cat-1")
-        var petScale = 1.0
+        var petList = arrayListOf(Constants.DEFAULT_PET)
+        var petScale = Constants.DEFAULT_SCALE
     }
 
     companion object {
@@ -26,6 +27,8 @@ class PetsSettings: PersistentStateComponent<PetsSettings.State> {
     }
 
     override fun loadState(state: State) {
+        state.petList = ArrayList(state.petList.map(Constants::validPetType))
+        state.petScale = Constants.validPetScale(state.petScale)
         this.petsState = state
     }
 }

@@ -1,7 +1,7 @@
 package dev.gabrielchl.intellijPets.utils
 
 object Constants {
-    val PET_TYPES = arrayListOf(
+    val PET_TYPES = listOf(
         "axolotl",
         "bunny",
         "cat-1",
@@ -34,4 +34,13 @@ object Constants {
         java.util.Map.entry("dog-5", 32),
         java.util.Map.entry("hedgehog", 32)
     )
+
+    const val DEFAULT_PET = "cat-1"
+    const val DEFAULT_SCALE = 1.0
+    val PET_SCALE_RANGE = 0.2..3.0
+
+    fun validPetType(value: String): String = value.takeIf(PET_TYPES::contains) ?: DEFAULT_PET
+
+    fun validPetScale(value: Double): Double =
+        value.takeIf { it.isFinite() }?.coerceIn(PET_SCALE_RANGE) ?: DEFAULT_SCALE
 }

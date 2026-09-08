@@ -11,6 +11,10 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+  testImplementation(kotlin("test"))
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
@@ -28,6 +32,10 @@ tasks {
   }
   withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
+  }
+
+  test {
+    useJUnitPlatform()
   }
 
   patchPluginXml {
